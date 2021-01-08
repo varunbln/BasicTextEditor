@@ -4,7 +4,7 @@ from utils import io_utils
 
 class EditorWindow:
     root = tk.Tk("Basic Text Editor")
-    buttonframe = tk.Frame(root)
+    button_frame = tk.Frame(root, background="#485092")
     scrollbar = tk.Scrollbar(root)
     text = tk.Text(root, yscrollcommand=scrollbar.set)
     file_name = None
@@ -24,14 +24,14 @@ class EditorWindow:
         self.root.bind('<Control-s>', (lambda event: io_utils.save(self)))
 
     def populate_navbar(self):
-        self.buttonframe.pack(side=tk.TOP, fill=tk.Y)
-        tk.Button(self.buttonframe, height=2, width=10, text="Save", command=lambda: io_utils.save(self)).grid(row=0, column=0)
-        tk.Button(self.buttonframe, height=2, width=10, text="Find").grid(row=0, column=1)
+        self.button_frame.pack(side=tk.TOP, fill=tk.BOTH)
+        tk.Button(self.button_frame, height=2, width=10, text="Save", bg="#9095bd", command=lambda: io_utils.save(self)).grid(row=0, column=0)
+        tk.Button(self.button_frame, height=2, width=10, text="Find", bg="#9095bd").grid(row=0, column=1)
 
     def init_scrollbar(self):
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.scrollbar.config(command=self.text.yview)
 
     def configure_textbox(self):
-        self.text.configure(font=("Ariel", 14))
+        self.text.configure(font=("Ariel", 14), bg="#21044D", fg="white", insertbackground="#e7e6f1")
         self.text.pack(fill=tk.BOTH, expand=True)
