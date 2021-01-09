@@ -1,4 +1,4 @@
-from tkinter import filedialog
+from tkinter import filedialog, END
 
 
 def save(editor_window):
@@ -15,3 +15,22 @@ def save(editor_window):
     my_file.write(typed_text)
     my_file.close()
     editor_window.file_name = save_loc
+
+
+def open_file(editor_window):
+    save(editor_window)
+    file = filedialog.askopenfilename()
+    my_file = open(file, "r")
+    try:
+        text = my_file.read()
+    except:
+        return
+    editor_window.text.delete('1.0', END)
+    editor_window.text.insert('1.0', text)
+    editor_window.file_name = file
+
+
+def new_and_save(editor_window):
+    save(editor_window)
+    editor_window.text.delete('1.0', END)
+    editor_window.file_name = None
